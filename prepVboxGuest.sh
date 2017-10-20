@@ -67,6 +67,7 @@ checkforvboxcd(){
 	done
 }
 
+# Make sure that the Virtual Box Guest Additions CD is inserted
 if ! checkforvboxcd; then exit 1; fi
 
 # Output and hold the start time for total time calculation.
@@ -97,7 +98,6 @@ if [[ "$PHASE_TO_RUN" == "phase2" ]]; then
 	PATH=/sbin:/bin:/usr/sbin:/usr/bin
 	KERN_DIR=/usr/src/kernels/`uname -r`
 	export KERN_DIR
-	if ! checkforvboxcd; then exit 1; fi
 	$VBOX_GUEST_CD_PATH/VBoxLinuxAdditions.run
 	echo "=== REBOOT REQUIRED ==="
 	echo "=== "
