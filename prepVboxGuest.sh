@@ -55,6 +55,8 @@ failIfNoVBCD(){
   fi
 }
 
+failIfNoVBCD
+
 # Output and hold the start time for total time calculation.
 START_TIME=`date +%s`
 echo "$0 starting..."
@@ -67,9 +69,9 @@ echo "=== Ensuring network is set to start on boot"
 sed -i -e "s/ONBOOT=no/ONBOOT=yes/g" /etc/sysconfig/network-scripts/ifcfg-enp0s3
 
 echo "=== Getting the latest Kernel and tools"
-yum update kernel*
+yum update kernel* -y
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel bzip2 perl
+yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel bzip2 perl -y
 
 # Reboot
 read -p "System needs to reboot.  Do you want to reboot now? [y/N] " -n 1 -r
