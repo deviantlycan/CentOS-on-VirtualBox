@@ -58,11 +58,21 @@ checkforvboxcd(){
 			echo "=== Virtual Box Guest Additions CD found at $VBOX_GUEST_CD_PATH"
 			return 0 # 0 is true in bash scripts
 		fi
+		echo ""
+		echo "======================================================================"
 		echo "=== Virtual Box Guest Additions CD was NOT found. Please insert the CD"
+		echo "=== "
 		echo "--- Using the Virtual Box main menu at the top of the window do this:"
 		echo "--- Select Devices > Insert Guest Additions CD Image"
 		echo "--- "
-		echo "--- if your mouse is captured by the Virtual Box window, press the right Ctrl key on your keyboard to release it."
+		echo "--- if your mouse is captured by the Virtual Box window, "
+		echo "--- press the right Ctrl key on your keyboard to release it."
+		echo "--- "
+		echo "--- Once the CD is inserted, a pop up will appear and ask to auto run"
+		echo "--- the contents.  DO NOT RUN THE CONTENTS, but run this script again"
+		echo "--- and the installation will be triggered at the correct time."
+		echo "======================================================================"
+		echo ""
 		return 1 # 1 is false in bash scripts
 	done
 }
