@@ -52,18 +52,19 @@ systemRebootCheck(){
 
 checkforvboxcd(){
 	for DIRECTORY_NAME in $CD_MEDIA_PATH; do
-	VBOX_GUEST_CD_PATH="/run/media/$DIRECTORY_NAME/VBOXADDITIONS*"
-	if ls $VBOX_GUEST_CD_PATH > /dev/null 2>&1; then 
-		VBOX_GUEST_CD_PATH=$(ls "/run/media/$DIRECTORY_NAME/")
-		echo "=== Virtual Box Guest Additions CD found at $VBOX_GUEST_CD_PATH"
-		return 0 # 0 is true in bash scripts
-	fi
-	echo "=== Virtual Box Guest Additions CD was NOT found. Please insert the CD"
-	echo "--- Using the Virtual Box main menu at the top of the window do this:"
-	echo "--- Select Devices > Insert Guest Additions CD Image"
-	echo "--- "
-	echo "--- if your mouse is captured by the Virtual Box window, press the right Ctrl key on your keyboard to release it."
-	return 1 # 1 is false in bash scripts
+		VBOX_GUEST_CD_PATH="$DIRECTORY_NAME/VBOXADDITIONS*"
+		if ls $VBOX_GUEST_CD_PATH > /dev/null 2>&1; then 
+			VBOX_GUEST_CD_PATH=$DIRECTORY_NAME/$(ls "$DIRECTORY_NAME/")
+			echo "=== Virtual Box Guest Additions CD found at $VBOX_GUEST_CD_PATH"
+			return 0 # 0 is true in bash scripts
+		fi
+		echo "=== Virtual Box Guest Additions CD was NOT found. Please insert the CD"
+		echo "--- Using the Virtual Box main menu at the top of the window do this:"
+		echo "--- Select Devices > Insert Guest Additions CD Image"
+		echo "--- "
+		echo "--- if your mouse is captured by the Virtual Box window, press the right Ctrl key on your keyboard to release it."
+		return 1 # 1 is false in bash scripts
+	done
 }
 
 if ! checkforvboxcd; then exit 1; fi
